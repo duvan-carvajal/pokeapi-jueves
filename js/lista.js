@@ -10,12 +10,27 @@ function mostrarLista(pokemones) {
     buscador.type = "text";
     buscador.placeholder = "Buscar Pokémon...";
     buscador.addEventListener("input", (evento) => buscarPoke(evento, pokemones));
+    //filtro
+    const tipos = [
+        "All",
+        "normal", "fighting", "flying", "poison", "ground", "rock",
+        "bug", "ghost", "steel", "fire", "water", "grass", "electric",
+        "psychic", "ice", "dragon", "dark", "fairy", "stellar", "shadow", "unknown"
+    ];
+    let listaTipos = "";
+    for (let i = 0; i < tipos.length; i++) {
+        listaTipos += `<button onclick="filtrarPorTipo('${tipos[i]}')">${tipos[i]}</button>`
+    }
+    const filtro = document.createElement("div");
+    filtro.classList.add("filtro");
+    filtro.innerHTML = listaTipos;
 
     // Generar la lista inicial
     seccion.innerHTML = generarLista(pokemones);
 
     // Agregar elementos al DOM
     app.appendChild(buscador);
+    app.appendChild(filtro);
     app.appendChild(seccion);
 }
 
@@ -55,3 +70,20 @@ function buscarPoke(evento, pokemones) {
 
 
 
+async function filtrarPorTipo(untipo) {
+    if(untipo == "All"){
+        conexionLista()
+    }else{
+        try {
+            const respuesta = await fetch(`https://pokeapi.co/api/v2/type/${untipo}`);
+            const datos = await respuesta.json();
+    
+            const pokemonesFiltrados = datos.pokemon.map(p => p.pokemon);
+    
+            mostrarLista(pokemonesFiltrados);
+        } catch (error) {
+            console.error("Error al filtrar por tipo:", error);
+            document.getElementById("app").innerHTML = `<p>Error al cargar Pokémon de tipo "${untipo}".</p>`;
+        }
+    }
+}

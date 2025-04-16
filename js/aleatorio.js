@@ -1,4 +1,3 @@
-
 var misNumeros = JSON.parse(localStorage.getItem("misNumeros")) || [];
 
 function mostrarAleatorio(pokemones) {
@@ -34,9 +33,4 @@ function mostrarAleatorio(pokemones) {
 
 
     app.innerHTML = pokesAleatorios;
-
-function mostrarAleatorio(){
-    const app = document.getElementById("app");
-    app.innerHTML = "aleatorio";
-
 }

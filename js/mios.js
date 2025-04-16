@@ -1,6 +1,5 @@
 function mostrarMios(){
     const app = document.getElementById("app");
-
     app.innerHTML = ""
     const seccion = document.createElement("section");
     seccion.classList.add("c-lista");
@@ -30,4 +29,5 @@ function mostrarMios(){
     contador.textContent = `${misNumeros.length} / ${totalPokes}`;
     app.appendChild(contador);
     app.appendChild(seccion);
+
 }

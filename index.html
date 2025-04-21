@@ -7,7 +7,15 @@
     <title>PokeApp</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="manifest" href="manifest.json">
-
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "42b0fd81-a018-4dcf-aeca-0c6486e82524",
+    });
+  });
+</script>
 </head>
 
 <body>
